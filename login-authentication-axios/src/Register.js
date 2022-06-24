@@ -24,8 +24,16 @@ const Register = () =>{
     if(success){
       let obj = {
         email:user,
-        pwd:pwd
+        password:pwd
       }
+      axios.post('/login', obj)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+     
     }
   };
 
