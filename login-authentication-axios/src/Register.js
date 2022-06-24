@@ -1,5 +1,7 @@
 import { useRef,useEffect,useState  } from "react";
-import './scss/main.css'
+import './scss/main.css';
+import axios from "./axios/axios";
+
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@$%#]).{8,24}$/;
 
@@ -10,15 +12,21 @@ const Register = () =>{
   const [validName,setValidName] = useState(false);
   const [userFocus,setUserFocus] = useState(false);
 
-  const [password,setPassword] = useState('');
-  const [ValidPassword,setValidPassword] = useState(false);
+  const [pwd,setPwd] = useState('');
+  const [ValidPwd,setValidPwd] = useState(false);
   const [PwdFocus,setPwdFocus] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const v1 = PWD_REGEX.test(password);
+    const v1 = PWD_REGEX.test(pwd);
     const v2 = USER_REGEX.test(user);
-    
+    setSuccess(true);
+    if(success){
+      let obj = {
+        email:user,
+        pwd:pwd
+      }
+    }
   };
 
   useEffect(()=>{
@@ -27,9 +35,9 @@ const Register = () =>{
   },[user]);
 
   useEffect(()=>{
-    let result = PWD_REGEX.test(password);
-    setValidPassword(result)
-  },[password]);
+    let result = PWD_REGEX.test(pwd);
+    setValidPwd(result)
+  },[pwd]);
 
   
 
@@ -69,10 +77,10 @@ const Register = () =>{
                     <input 
                     type="password"
                     required 
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    value={pwd}
+                    onChange={(e)=>setPwd(e.target.value)}
                     />
-                    {ValidPassword && <p>Valid Password</p>}
+                    {ValidPwd && <p>Valid Password</p>}
                   </div>
                   <button type="submit" className="button button-block">Get Started</button>
                   </form>
